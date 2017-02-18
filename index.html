@@ -1,0 +1,65 @@
+---
+layout: map
+map: raster
+title: OpenStreetMap India
+---
+
+<section class="map-container {{page.map}}">
+
+  <div id='map'></div>
+
+</section>
+
+<script>
+    // Lock to bounds
+    // var southWest = L.latLng(7.319, 61.523),
+    //     northEast = L.latLng(36.774, 100.635),
+    //     bounds = L.latLngBounds(southWest, northEast);
+
+    // // Provide your access token
+    L.mapbox.accessToken = 'pk.eyJ1IjoicHJhc2hhbnRrdXJ1cCIsImEiOiJjaXE2Yms0MmQwMDdzZnNra2VzcHE1OTQ3In0.gxsfnSyKvnldYpA-Uhul0A';
+
+    // Definte tile urls of each layer
+    var indiaMap = L.mapbox.tileLayer('mapbox://styles/prashantkurup/cizajm7lm00e12ro8epoq1ymu'),
+        bhuvanSatellite = L.tileLayer('http://tile1.nrsc.gov.in/tilecache/tilecache.py/1.0.0/bhuvan_imagery2/{z}/{x}/{y}.jepg', {
+            attribution: 'NRSC/ISRO'
+        }),
+        postalMap = L.mapbox.tileLayer('planemad.9acc2036'),
+        // truemarbleSatellite = L.mapbox.tileLayer('planemad.e76fee83'),
+        highwaysMap = L.mapbox.tileLayer('planemad.66359ac0'),
+        connectivityGraph = L.mapbox.tileLayer('planemad.5504651b'),
+        railwayMap = L.mapbox.tileLayer('planemad.e5dd1290');
+
+    var baseLayers = {
+        "Railway Map": railwayMap,
+        "Bhuvan Satellite": bhuvanSatellite,
+        // "NASA Satellite": truemarbleSatellite,
+        "OpenStreetMap India": indiaMap
+    };
+
+    var overlayMaps = {
+        "Highway": highwaysMap,
+        "Postal Codes": postalMap,
+        "Connectivity": connectivityGraph
+    };
+
+    // Create a map in the div #map
+    var map = L.map('map', {
+            layers: indiaMap
+        }, {
+            maxBounds: bounds,
+
+        })
+        .addControl(L.mapbox.geocoderControl('mapbox.places', {
+            autocomplete: true
+        }))
+        .setView([22.14980, 79.08060], 5);
+
+    L.hash(map);
+
+
+    //Add layer control
+    L.control.layers(baseLayers, overlayMaps, {
+        position: 'topleft'
+    }).addTo(map);
+</script>
