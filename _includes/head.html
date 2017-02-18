@@ -11,12 +11,8 @@
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
 
     <!-- Choose correct map libraries for standard or GL map -->
-  {% if page.map == "raster" %}
-    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
-    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
+ 
 
-  {% elsif page.map == "gl" %}
     <!-- Map -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.15.0/mapbox-gl.js'></script>
     <script src='../js/mapbox-gl-js-collection.js'></script>
@@ -27,5 +23,5 @@
     <!-- Geocoder -->
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.0.0/mapbox-gl-geocoder.js'></script>
     <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.0.0/mapbox-gl-geocoder.css' type='text/css' />
-  {% endif %}
+ 
 </head>
